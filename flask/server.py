@@ -1,22 +1,14 @@
-#!/usr/bin/env python
-import os
-
 from flask import Flask
-from pymongo import MongoClient
+from flask_pymongo import PyMongo
 
 app = Flask(__name__)
 
-client = MongoClient("mongo:27017")
+# Database configuration
+app.config["MONGO_URI"] = "mongodb://mongo:27017/yourDatabase"
+mongo = PyMongo(app)
 
-@app.route('/')
-def todo():
-    try:
-        client.admin.command('ismaster')
-    except:
-        return "Server not available"
-    return "Hello from the MongoDB client!\n"
-
+# Import routes
+import routes
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=os.environ.get("FLASK_SERVER_PORT", 9090), debug=True)
-
+    app.run(host='0.0.0.0', port=9090, debug=True)
