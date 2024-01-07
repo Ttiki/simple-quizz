@@ -1,18 +1,7 @@
-//Function to open the answer json file inside the res folder
-
-const { systemPreferences } = require("@electron/remote");
-
 //Dump all the data inside a table of object dezerialized from the json file
-function openAnswer(fileName) {
-    //Open the json file 
-    var jsonFile = new XMLHttpRequest();
-    jsonFile.open("GET", fileName, false);
-    jsonFile.send();
-    //Get the data from the json file
-    var jsonData = jsonFile.responseText;
+function openAnswer() {
     //Dezerialize the json data
-    var jsonObj = JSON.parse(jsonData);
-
+    var jsonObj = JSON.parse('{{ questions_json|tojson|safe }}');
     //Create a table of qa objects
     var qas = [];
     for (var i = 0; i < jsonObj.length; i++) {
