@@ -8,13 +8,20 @@ class Item(db.Model):
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
     initial_price = db.Column(db.Integer, nullable=False)
-    closing_time = db.Column(db.DateTime, nullable=False)
+    closing_time = db.Column(db.DateTime, default=None, nullable=True)
 
     bids = db.relationship('Bid', backref='item', lazy=True)
 
     # Add a user_id field to link the seller to the user table
     # Update the foreign key reference to match the actual table name
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __init__(self, name, description, initial_price, closing_time=None, user_id=None):
+        self.name = name
+        self.description = description
+        self.initial_price = initial_price
+        self.closing_time = closing_time
+        self.user_id = user_id
 
     def __repr__(self):
         return f"<Item(id={self.id}, name={self.name}, initial_price={self.initial_price}, closing_time={self.closing_time}, user_id={self.user_id})>"
