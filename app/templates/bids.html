@@ -1,0 +1,18 @@
+<!-- templates/bids.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ongoing Bids</title>
+</head>
+<body>
+<h1>Ongoing Bids</h1>
+<ul>
+    {% for bid in bids %}
+        <li>{{ bid.item_name }} - Current Price: {{ bid.current_price }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>
