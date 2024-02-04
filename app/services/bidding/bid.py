@@ -78,3 +78,9 @@ def get_all_bids_for_item(item_id):
 def get_ongoing_bids():
     current_time = datetime.now()
     return Item.query.filter(Item.end_time > current_time).all()
+
+def get_current_highest_bid(item_id):
+    highest_bid = Bid.query.filter_by(item_id=item_id).order_by(Bid.amount.desc()).first()
+    if highest_bid:
+        return highest_bid.amount
+    return None

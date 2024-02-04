@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details</title>
+</head>
+<body>
+<h1>{{ item.name }}</h1>
+<p>Description: {{ item.description }}</p>
+<p>Initial Price: {{ item.initial_price }}</p>
+
+<!-- Display existing bids -->
+<h2>Existing Bids</h2>
+<ul>
+    {% for bid in bids %}
+        <li>{{ bid.amount }}</li>
+    {% endfor %}
+</ul>
+
+<!-- Add a button to place a bid -->
+<form method="POST" action="{{ url_for('bidding_service.place_bid', item_id=item.id) }}">
+    <input type="hidden" name="item_id" value="{{ item.id }}"> {# Add the item_id as a hidden field #}
+    <button type="submit">Place Bid</button>
+</form>
+</body>
+</html>

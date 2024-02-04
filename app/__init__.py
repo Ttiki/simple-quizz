@@ -3,21 +3,23 @@
 from flask import Flask
 from sqlalchemy import create_engine, text
 
-from .models.db import db
-from .models.user import User
-from .models.item import Item
 from .models.bid import Bid
-from .routes.seller import seller_service
+from .models.db import db
+from .models.item import Item
+from .models.user import User
 from .routes.bid import bidding_service
+from .routes.seller import seller_service
 
 
 def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///esbay.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = 'fb7cdcd143d4a71051e27c3b2d8288acdea7f78c7d4857816789f916578da35d'
 
     # Initialize the SQLAlchemy extension
     db.init_app(app)
+
 
     # Check if 'users' table exists
     engine = create_engine('sqlite:///esbay.db')

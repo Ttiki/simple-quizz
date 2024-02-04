@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item</title>
+</head>
+<body>
+<h1>Add Item</h1>
+<form method="POST" action="{{ url_for('seller_service.add_item') }}">
+    {{ form.csrf_token }}
+    <label for="name">Item Name:</label>
+    {{ form.name() }}
+    <br>
+    <label for="description">Item Description:</label>
+    {{ form.description() }}
+    <br>
+    <label for="initial_price">Initial Price:</label>
+    {{ form.initial_price() }}
+    <br>
+    {{ form.submit() }}
+</form>
+</body>
+</html>

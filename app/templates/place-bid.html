@@ -1,0 +1,20 @@
+<!-- place_bid.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Bid</title>
+</head>
+<body>
+<h2>Place Bid</h2>
+<form method="POST" action="{{ url_for('bidding_service.place_bid', item_id=item_id) }}">
+    {{ form.csrf_token }}
+    <input type="hidden" name="item_id" value="{{ item_id }}"> {# Add a hidden field for item_id #}
+
+    <label for="amount">Bid Amount:</label>
+    {{ form.amount }}
+    {{ form.submit }}
+</form>
+</body>
+</html>
