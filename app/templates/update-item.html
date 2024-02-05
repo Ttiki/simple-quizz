@@ -7,17 +7,17 @@
     <title>Update Item</title>
 </head>
 <body>
-  <h2>Update Item</h2>
-  <form method="POST" action="{{ url_for('seller_service.update_item', item_id=item.id) }}">
-      {{ form.hidden_tag() }}
-      <label for="name">Item Name:</label>
-      {{ form.name }}
-      <label for="description">Item Description:</label>
-      {{ form.description }}
-      <label for="initial_price">Initial Price:</label>
-      {{ form.initial_price }}
-      {{ form.csrf_token }}  <!-- Include the CSRF token here -->
-      {{ form.submit }}
-  </form>
+<h2>Update Item</h2>
+<form method="POST" action="{{ url_for('seller_service.update_item', item_id=item.id) }}">
+    {{ form.hidden_tag() }}
+    <label for="name">Item Name:</label>
+    {{ form.name }}
+    <label for="description">Item Description:</label>
+    {{ form.description }}
+    <label for="initial_price">Initial Price:</label>
+    {{ form.initial_price }}
+    {{ form.csrf_token }}  <!-- Include the CSRF token here -->
+    {{ form.submit }}
+</form>
 </body>
 </html>

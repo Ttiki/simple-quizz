@@ -8,7 +8,12 @@ bidding_service = Blueprint('bidding_service', __name__)
 
 @bidding_service.route('/ongoing_bids', methods=['GET'])
 def ongoing_bids():
-    # Assuming you have a method to retrieve ongoing bids from the database
+    """
+    Retrieve ongoing bids from the database and render them on the bids.html template.
+
+    Returns:
+        The rendered template with the ongoing bids.
+    """
     ongoing_bids = bid.get_ongoing_bids()
 
     return render_template('bids.html', bids=ongoing_bids)
@@ -16,6 +21,15 @@ def ongoing_bids():
 
 @bidding_service.route('/create_bidding', methods=['POST'])
 def create_bidding():
+    """
+    Create a new bidding for an item.
+
+    Parameters:
+        None
+
+    Returns:
+        A JSON response containing the result of the bidding creation and the status code.
+    """
     data = request.get_json()
 
     if 'item_id' not in data or 'initial_price' not in data:
@@ -31,6 +45,15 @@ def create_bidding():
 
 @bidding_service.route('/get_bidding/<int:item_id>', methods=['GET'])
 def get_bidding(item_id):
+    """
+    Get the bidding information for a specific item.
+
+    Parameters:
+        item_id (int): The ID of the item.
+
+    Returns:
+        tuple: A tuple containing the bidding information and the status code.
+    """
     result, status_code = bid.get_bidding(item_id)
 
     return jsonify(result), status_code
@@ -38,6 +61,15 @@ def get_bidding(item_id):
 
 @bidding_service.route('/place_bid/<int:item_id>', methods=['GET', 'POST'])
 def place_bid(item_id):
+    """
+    Place a bid on an item.
+
+    Args:
+        item_id (int): The ID of the item to place a bid on.
+
+    Returns:
+        tuple: A tuple containing the result of the bid and the status code.
+    """
     form = PlaceBidForm()
 
     if form.validate_on_submit():
@@ -51,5 +83,14 @@ def place_bid(item_id):
 
 @bidding_service.route('/get_bids/<int:item_id>', methods=['GET'])
 def get_all_bids_for_item(item_id):
+    """
+    Retrieve all bids for a specific item.
+
+    Parameters:
+    item_id (int): The ID of the item.
+
+    Returns:
+    tuple: A tuple containing the result (list of bids) and the status code.
+    """
     result, status_code = bid.get_all_bids_for_item(item_id)
     return jsonify(result), status_code

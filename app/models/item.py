@@ -2,6 +2,24 @@ from app.models.db import db
 
 
 class Item(db.Model):
+    """
+    Represents an item in the e-commerce platform.
+
+    Attributes:
+    - id (int): The unique identifier of the item.
+    - name (str): The name of the item.
+    - description (str): The description of the item.
+    - initial_price (int): The initial price of the item.
+    - closing_time (datetime): The closing time of the item's auction.
+    - bids (list): The list of bids placed on the item.
+    - user_id (int): The ID of the user who listed the item.
+
+    Methods:
+    - __init__(self, name, description, initial_price, closing_time=None, user_id=None): Initializes a new Item object.
+    - __repr__(self): Returns a string representation of the Item object.
+    - update(self, data): Updates the item details based on the provided data.
+    - serialize(self): Converts the item details to a dictionary for JSON serialization.
+    """
     __tablename__ = 'items'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -12,8 +30,6 @@ class Item(db.Model):
 
     bids = db.relationship('Bid', backref='item', lazy=True)
 
-    # Add a user_id field to link the seller to the user table
-    # Update the foreign key reference to match the actual table name
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __init__(self, name, description, initial_price, closing_time=None, user_id=None):

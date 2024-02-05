@@ -12,6 +12,12 @@ from .routes.seller import seller_service
 
 
 def create_app():
+    """
+    Creates and configures the Flask application.
+
+    Returns:
+        Flask: The configured Flask application.
+    """
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///esbay.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -19,7 +25,6 @@ def create_app():
 
     # Initialize the SQLAlchemy extension
     db.init_app(app)
-
 
     # Check if 'users' table exists
     engine = create_engine('sqlite:///esbay.db')

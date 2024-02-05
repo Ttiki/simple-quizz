@@ -2,6 +2,17 @@ from app.models.db import db
 
 
 class User(db.Model):
+    """
+    Represents a user in the system.
+
+    Attributes:
+        id (int): The unique identifier of the user.
+        username (str): The username of the user.
+        name (str): The name of the user.
+        surname (str): The surname of the user.
+        nickname (str): The nickname of the user.
+    """
+
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
